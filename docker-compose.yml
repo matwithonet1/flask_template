@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - '5005:5005'
+    depends_on:
+      - redis
+  redis:
+    image: 'redis:alpine'
+    command: redis-server
+    ports:
+      - 6379:6379
